@@ -25,9 +25,9 @@ The goal of this analysis is briefly present the results of the intial explorati
 To begin the assessment, the data was read in via file connections. All files were initally read in using the `"rt" mode`, however intial exploration showed that this resulted in a warning for `en_US.news.txt` and a suspiciously small file size. Switching the mode to `"rb" mode` rectified the problem.
 
 ```{r load, cache= TRUE}
-twitter.con <- file("raw data/final/en_US/en_US.twitter.txt", "r") 
-blogs.con <- file("raw data/final/en_US/en_US.blogs.txt", "r") 
-news.con <- file("raw data/final/en_US/en_US.news.txt", "rb") 
+twitter.con <- file("raw_data/final/en_US/en_US.twitter.txt", "r") 
+blogs.con <- file("raw_data/final/en_US/en_US.blogs.txt", "r") 
+news.con <- file("raw_data/final/en_US/en_US.news.txt", "rb") 
 
 US.twitter <- readLines(twitter.con, skipNul = TRUE) 
 US.blogs <- readLines(blogs.con, skipNul = TRUE) 

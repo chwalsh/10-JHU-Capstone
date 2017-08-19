@@ -14,9 +14,9 @@ source("On Load.R")
 
 # read text data
 
-twitter.con <- file("raw data/final/en_US/en_US.twitter.txt", "r") 
-blogs.con <- file("raw data/final/en_US/en_US.blogs.txt", "r") 
-news.con <- file("raw data/final/en_US/en_US.news.txt", "rb") 
+twitter.con <- file("raw_data/final/en_US/en_US.twitter.txt", "r") 
+blogs.con <- file("raw_data/final/en_US/en_US.blogs.txt", "r") 
+news.con <- file("raw_data/final/en_US/en_US.news.txt", "rb") 
 
 US.twitter <- readLines(twitter.con, skipNul = TRUE) 
 US.blogs <- readLines(blogs.con, skipNul = TRUE) 
@@ -48,28 +48,11 @@ rm(US.news)
 BiTokens <- function(x) {NGramTokenizer(x, Weka_control(min = 2, max = 2))}
 TriTokens <- function(x) {NGramTokenizer(x, Weka_control(min = 3, max = 3))}
 QuadTokens <- function(x) {NGramTokenizer(x,Weka_control(min = 4, max = 4))}
-PentTokens <- function(x) {NGramTokenizer(x,Weka_control(min = 5, max = 5))}
 
-
-for (i in 1:2){
+for (i in 1:20){
 
 doc.list <- list(blog = US.blogs.chunk[[i]], twitter = US.twitter.chunk[[i]], 
                                        news = US.news.chunk[[i]])
-
-
-
-# # create a list of random variables
-# set.seed(522)
-# percent <- 0.05
-# random <- lapply(doc.list, function (x) rbinom(x, 1, percent))
-# # create a new, empty list to store random selections
-# sample.list <- list(blog = NA, twitter = NA, news = NA)
-# # traverse each element of the original list, selecting ~x% of the sample, as
-# # determined in rbinom
-# for (i in 1:length(doc.list)) {
-#   sample.list[[i]] <- doc.list[[i]][random[[i]] == 1]
-# }
-
 
 
 ## Clean Text
@@ -122,16 +105,5 @@ tdm4.freq <- tdm4.freq %>% separate(word, c("one", "two", "three", "word"), " ")
 tdm4.freq <- na.omit(tdm4.freq)
 saveRDS(tdm4.freq, paste("NGrams/QuadGram",i,".rds", sep = ""))
 rm(tdm4.freq)
-
-# tdm5 <- TermDocumentMatrix(docs, control=list(tokenize=PentTokens))
-# tdm5 <- removeSparseTerms(tdm5, 0.9999)
-# tdm5.freq <- sort(row_sums(tdm5, na.rm = T), decreasing=TRUE)
-# rm(tdm5)
-# tdm5.freq <- data.table(word=names(tdm5.freq), freq=tdm5.freq)
-# tdm5.freq <- tdm5.freq %>% separate(word, c("one", "two", "three", "four", "word"), " ") %>%
-#   unite(nmin1.gram, one:four, sep =" ")
-# tdm5.freq <- na.omit(tdm5.freq)
-# saveRDS(tdm5.freq, paste("NGrams/PentGram",i,".rds", sep = ""))
-# rm(tdm5.freq)
 
 }

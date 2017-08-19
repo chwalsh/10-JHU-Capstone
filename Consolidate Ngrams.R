@@ -19,8 +19,8 @@ consolidate_ngram <- function(x){
     UniGram <- UniGram[, j = list(hashword = spooky.32(word), freq),by = list(word)]
     saveRDS(UniGram, "NGrams/Final_Unigram.rds")
     Uni <- hashmap(UniGram$hashword, UniGram$word)
-    saveRDS(Uni, "NGrams/Uni.rds")
-    
+    save_hashmap(Uni, "NGrams/Uni")
+
   }
   
   if (x == 2){ 
@@ -83,23 +83,6 @@ consolidate_ngram <- function(x){
     
   }
   
-  # if (x == 5){
-  #   
-  #   PentGram <- list()
-  #   
-  #   for (i in 1:16){
-  #   
-  #     PentGram[[i]] <- readRDS(paste("NGrams/PentGram",i,".rds", sep = ""))
-  #   
-  #     }
-  #   
-  #   PentGram <- rbindlist(PentGram)
-  #   PentGram <- PentGram[, j = list(freq = sum(freq)),by = list(nmin1.gram, word)]
-  #   PentGram <- PentGram[, j = list(hashword = spooky.32(nmin1.gram), freq), list(nmin1.gram, word)]
-  #   PentGram <- PentGram[,1:4]
-  #   saveRDS(PentGram, "NGrams/Final_PentGram.rds")
-  #   
-  # }
 }
   
 
@@ -107,11 +90,11 @@ consolidate_ngram(1)
 consolidate_ngram(2)
 consolidate_ngram(3)
 consolidate_ngram(4)
-# consolidate_ngram(5)
-  
 
   
-UniGram <- readRDS("NGrams/Final_UniGram.rds")
-BiGram <- readRDS("NGrams/Final_BiGram.rds")
-TriGram <- readRDS("NGrams/Final_TriGram.rds")
-QuadGram <- readRDS("NGrams/Final_QuadGram.rds")
+# UniGram <- readRDS("NGrams/Final_UniGram.rds")
+# BiGram <- readRDS("NGrams/Final_BiGram.rds")
+# TriGram <- readRDS("NGrams/Final_TriGram.rds")
+# QuadGram <- readRDS("NGrams/Final_QuadGram.rds")
+
+Uni <- load_hashmap("Uni")

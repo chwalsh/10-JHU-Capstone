@@ -46,3 +46,12 @@ Network Trash Folder
 Temporary Items
 .apdisk
 .Rproj.user
+
+
+# Ignore raw data and NGram folder for github
+raw_data/**
+NGrams/**
+Explore_Swiftkey_files/**
+Explore_Swiftkey_cache/**
+Load.R
+Load and Explore.R
