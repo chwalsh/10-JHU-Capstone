@@ -2,13 +2,13 @@
 
 source("On Load.R")
 
-consolidate_ngram <- function(x){
+consolidate_ngram <- function(gram, start, stop){
   
-  if (x == 1){
+  if (gram == 1){
     
     UniGram <- list()
     
-    for (i in 1:16){
+    for (i in start:stop){
       
       UniGram[[i]] <- readRDS(paste("NGrams/UniGram",i,".rds", sep = ""))
 
@@ -22,11 +22,11 @@ consolidate_ngram <- function(x){
 
   }
   
-  if (x == 2){ 
+  if (gram == 2){ 
     
     BiGram <- list()  
     
-    for (i in 1:16){
+    for (i in start:stop){
     
       BiGram[[i]] <- readRDS(paste("NGrams/BiGram",i,".rds", sep = ""))
 
@@ -50,11 +50,11 @@ consolidate_ngram <- function(x){
 
   }
   
-  if (x == 3){
+  if (gram == 3){
     
     TriGram <- list()
     
-    for (i in 1:16){
+    for (i in start:stop){
     
       TriGram[[i]] <- readRDS(paste("NGrams/TriGram",i,".rds", sep = ""))
 
@@ -78,11 +78,11 @@ consolidate_ngram <- function(x){
 
   }
   
-  if (x == 4){
+  if (gram == 4){
     
     QuadGram <- list()
     
-    for (i in 1:16){
+    for (i in start:stop){
       
       QuadGram[[i]] <- readRDS(paste("NGrams/QuadGram",i,".rds", sep = ""))
 
@@ -109,12 +109,16 @@ consolidate_ngram <- function(x){
 }
   
 
-UniGram <- consolidate_ngram(1)
-BiGram <- consolidate_ngram(2)
-TriGram <- consolidate_ngram(3)
-QuadGram <- consolidate_ngram(4)
+UniGram <- consolidate_ngram(1,1,16)
+BiGram <- consolidate_ngram(2,1,16)
+TriGram <- consolidate_ngram(3,1,16)
+QuadGram <- consolidate_ngram(4,1,16)
 
-BiGram <- BiGram_bu
+UniGram_test <- consolidate_ngram(1,17,20)
+BiGram_test <- consolidate_ngram(2,17,20)
+TriGram_test <- consolidate_ngram(3,17,20)
+QuadGram_test <- consolidate_ngram(4,17,20)
+
 
 
 

@@ -112,3 +112,10 @@ out <- katzgt_quad("groceries in each")
 
 out$word[1:3]
 out[1:50,]
+
+
+set.seed(522)
+sample <- QuadGram_test[sample(.N,500)]
+predict <- sapply(sample$nmin1.gram, katzgt_quad)
+
+
