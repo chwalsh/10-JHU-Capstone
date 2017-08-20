@@ -35,6 +35,16 @@ consolidate_ngram <- function(x){
     BiGram <- rbindlist(BiGram)
     BiGram <- BiGram[, j = list(freq = sum(freq)),by = list(nmin1.gram, word)]
     BiGram <- BiGram[, j = list(freq), by = list(nmin1.gram, word)]
+    
+    BiFreqCount <- BiGram[j = list(count = .N), by = freq]
+    BiFreqCount <- BiFreqCount[j = list(freq, count, freq_1 = freq + 1)]
+    BiFreqCount <- merge(BiFreqCount, BiFreqCount, by.x = "freq_1", by.y = "freq")[j = list(freq, count.x, count.y)]
+    BiFreqCount <- BiFreqCount[i = freq <= 5, j = list(count.x, count.y, freq_adj = (freq + 1)*(count.y/count.x)), by = freq]
+    BiFreqCount <- BiFreqCount[key = "freq"]
+    
+    BiGram <- BiGram[BiFreqCount, freq_adj:= freq_adj, on ="freq"]
+    BiGram[is.na(BiGram$freq_adj)]$freq_adj <- BiGram[is.na(BiGram$freq_adj)]$freq
+    
     saveRDS(BiGram, "NGrams/Final_Bigram.rds")
     return(BiGram)
 
@@ -53,6 +63,16 @@ consolidate_ngram <- function(x){
     TriGram <- rbindlist(TriGram)
     TriGram <- TriGram[, j = list(freq = sum(freq)),by = list(nmin1.gram, word)]
     TriGram <- TriGram[, j = list(freq), by = list(nmin1.gram, word)]
+    
+    TriFreqCount <- TriGram[j = list(count = .N), by = freq]
+    TriFreqCount <- TriFreqCount[j = list(freq, count, freq_1 = freq + 1)]
+    TriFreqCount <- merge(TriFreqCount, TriFreqCount, by.x = "freq_1", by.y = "freq")[j = list(freq, count.x, count.y)]
+    TriFreqCount <- TriFreqCount[i = freq <= 5, j = list(count.x, count.y, freq_adj = (freq + 1)*(count.y/count.x)), by = freq]
+    TriFreqCount <- TriFreqCount[key = "freq"]
+    
+    TriGram <- TriGram[TriFreqCount, freq_adj:= freq_adj, on ="freq"]
+    TriGram[is.na(TriGram$freq_adj)]$freq_adj <- TriGram[is.na(TriGram$freq_adj)]$freq
+    
     saveRDS(TriGram, "NGrams/Final_Trigram.rds")
     return(TriGram)
 
@@ -71,6 +91,16 @@ consolidate_ngram <- function(x){
     QuadGram <- rbindlist(QuadGram)
     QuadGram <- QuadGram[, j = list(freq = sum(freq)),by = list(nmin1.gram, word)]
     QuadGram <- QuadGram[, j = list(freq), by = list(nmin1.gram, word)]
+    
+    QuadFreqCount <- QuadGram[j = list(count = .N), by = freq]
+    QuadFreqCount <- QuadFreqCount[j = list(freq, count, freq_1 = freq + 1)]
+    QuadFreqCount <- merge(QuadFreqCount, QuadFreqCount, by.x = "freq_1", by.y = "freq")[j = list(freq, count.x, count.y)]
+    QuadFreqCount <- QuadFreqCount[i = freq <= 5, j = list(count.x, count.y, freq_adj = (freq + 1)*(count.y/count.x)), by = freq]
+    QuadFreqCount <- QuadFreqCount[key = "freq"]
+    
+    QuadGram <- QuadGram[QuadFreqCount, freq_adj:= freq_adj, on ="freq"]
+    QuadGram[is.na(QuadGram$freq_adj)]$freq_adj <- QuadGram[is.na(QuadGram$freq_adj)]$freq
+    
     saveRDS(QuadGram, "NGrams/Final_Quadgram.rds")
     return(QuadGram)
 
@@ -84,5 +114,9 @@ BiGram <- consolidate_ngram(2)
 TriGram <- consolidate_ngram(3)
 QuadGram <- consolidate_ngram(4)
 
-# BiGram <- BiGram[j = list(freq_grp = as.factor(freq)), by = list(nmin1.gram, word, freq)]
-# BiFreqCount <- BiGram[j = list(count = count(freq_char)), by = freq_grp]
+BiGram <- BiGram_bu
+
+
+
+
+
