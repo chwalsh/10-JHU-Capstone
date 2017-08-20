@@ -18,9 +18,14 @@ twitter.con <- file("raw_data/final/en_US/en_US.twitter.txt", "r")
 blogs.con <- file("raw_data/final/en_US/en_US.blogs.txt", "r") 
 news.con <- file("raw_data/final/en_US/en_US.news.txt", "rb") 
 
-US.twitter <- readLines(twitter.con, skipNul = TRUE) 
-US.blogs <- readLines(blogs.con, skipNul = TRUE) 
-US.news <- readLines(news.con, skipNul = TRUE) 
+US.twitter <- readLines(twitter.con, skipNul = TRUE, encoding = "UTF-8") 
+US.blogs <- readLines(blogs.con, skipNul = TRUE, encoding = "UTF-8") 
+US.news <- readLines(news.con, skipNul = TRUE, encoding = "UTF-8") 
+
+# US.twitter <- readLines(twitter.con, skipNul = TRUE) 
+# US.blogs <- readLines(blogs.con, skipNul = TRUE) 
+# US.news <- readLines(news.con, skipNul = TRUE) 
+
 
 set.seed(522)
 US.twitter <- sample(US.twitter)
@@ -55,6 +60,11 @@ doc.list <- list(blog = US.blogs.chunk[[i]], twitter = US.twitter.chunk[[i]],
 
 
 ## Clean Text
+
+
+doc.list <- lapply(doc.list, function(x) stri_trans_general(x, "latin-ascii"))
+doc.list <- lapply(doc.list, function(x) iconv(x, "UTF-8", "ASCII", sub = ""))
+
 
 docs <- VCorpus(VectorSource(doc.list))
 
