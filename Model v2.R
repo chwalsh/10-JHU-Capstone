@@ -22,10 +22,10 @@ Quad <- load_hashmap("NGrams/Quad")
 
 
 
-  predict_unigram <- function(x){
-    UniGram[1,1]
-    
-  }
+predict_unigram <- function(x){
+  UniGram[1,1]
+  
+}
 
 predict_bigram <- function(x){
   # BiGram[x == BiGram$hashword,2]
@@ -62,11 +62,11 @@ predict_backoff <- function(x){
   last.one <- x[length(x)]
   last.two <- paste(x[length(x)-1],last.one)
   last.three <- paste(x[length(x)-2], last.two)
-
+  
   last.one <- spooky.32(last.one)
   last.two <- spooky.32(last.two)
   last.three <- spooky.32(last.three)
-
+  
   if (!is.na(predict_quadgram(last.three)[1])){
     predict_quadgram(last.three)[1]}
   else if (!is.na(predict_trigram(last.two)[1])){

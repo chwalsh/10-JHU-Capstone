@@ -27,7 +27,6 @@ US.twitter <- sample(US.twitter)
 US.blogs <- sample(US.blogs)
 US.news <- sample(US.news)
 
-## insert clean
 
 US.twitter.chunk <- split(US.twitter, cut(seq_along(US.twitter), 20, labels = FALSE)) 
 US.blogs.chunk <- split(US.blogs, cut(seq_along(US.blogs), 20, labels = FALSE)) 

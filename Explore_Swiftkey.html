@@ -130,9 +130,9 @@ $(document).ready(function () {
 <div id="data-load" class="section level2">
 <h2>Data Load</h2>
 <p>To begin the assessment, the data was read in via file connections. All files were initally read in using the <code>&quot;rt&quot; mode</code>, however intial exploration showed that this resulted in a warning for <code>en_US.news.txt</code> and a suspiciously small file size. Switching the mode to <code>&quot;rb&quot; mode</code> rectified the problem.</p>
-<pre class="r"><code>twitter.con &lt;- file(&quot;raw data/final/en_US/en_US.twitter.txt&quot;, &quot;r&quot;) 
-blogs.con &lt;- file(&quot;raw data/final/en_US/en_US.blogs.txt&quot;, &quot;r&quot;) 
-news.con &lt;- file(&quot;raw data/final/en_US/en_US.news.txt&quot;, &quot;rb&quot;) 
+<pre class="r"><code>twitter.con &lt;- file(&quot;raw_data/final/en_US/en_US.twitter.txt&quot;, &quot;r&quot;) 
+blogs.con &lt;- file(&quot;raw_data/final/en_US/en_US.blogs.txt&quot;, &quot;r&quot;) 
+news.con &lt;- file(&quot;raw_data/final/en_US/en_US.news.txt&quot;, &quot;rb&quot;) 
 
 US.twitter &lt;- readLines(twitter.con, skipNul = TRUE) 
 US.blogs &lt;- readLines(blogs.con, skipNul = TRUE) 
