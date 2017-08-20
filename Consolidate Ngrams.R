@@ -16,11 +16,9 @@ consolidate_ngram <- function(x){
     
     UniGram <- rbindlist(UniGram)
     UniGram <- UniGram[, j = list(freq = sum(freq)),by = word]
-    UniGram <- UniGram[, j = list(hashword = spooky.32(word), freq),by = list(word)]
+    UniGram <- UniGram[, j = list(freq),by = list(word)]
     saveRDS(UniGram, "NGrams/Final_Unigram.rds")
-    UniGram <- UniGram[order(freq)]
-    Uni <- hashmap(UniGram$hashword, UniGram$word)
-    save_hashmap(Uni, "NGrams/Uni")
+    return(UniGram)
 
   }
   
@@ -36,14 +34,9 @@ consolidate_ngram <- function(x){
     
     BiGram <- rbindlist(BiGram)
     BiGram <- BiGram[, j = list(freq = sum(freq)),by = list(nmin1.gram, word)]
-    BiGram <- BiGram[, j = list(hashword = spooky.32(nmin1.gram), freq), list(nmin1.gram, word)]
-    BiGram <- BiGram[,1:4] 
+    BiGram <- BiGram[, j = list(freq), by = list(nmin1.gram, word)]
     saveRDS(BiGram, "NGrams/Final_Bigram.rds")
-    BiGram <- BiGram[order(freq)]
-    Bi <- hashmap(BiGram$hashword, BiGram$word)
-    save_hashmap(Bi, "NGrams/Bi")
-
-    
+    return(BiGram)
 
   }
   
@@ -59,13 +52,10 @@ consolidate_ngram <- function(x){
     
     TriGram <- rbindlist(TriGram)
     TriGram <- TriGram[, j = list(freq = sum(freq)),by = list(nmin1.gram, word)]
-    TriGram <- TriGram[, j = list(hashword = spooky.32(nmin1.gram), freq), list(nmin1.gram, word)]
-    TriGram <- TriGram[,1:4]
+    TriGram <- TriGram[, j = list(freq), by = list(nmin1.gram, word)]
     saveRDS(TriGram, "NGrams/Final_Trigram.rds")
-    TriGram <- TriGram[order(freq)]
-    Tri <- hashmap(TriGram$hashword, TriGram$word)
-    save_hashmap(Tri, "NGrams/Tri")
-    
+    return(TriGram)
+
   }
   
   if (x == 4){
@@ -80,28 +70,19 @@ consolidate_ngram <- function(x){
     
     QuadGram <- rbindlist(QuadGram)
     QuadGram <- QuadGram[, j = list(freq = sum(freq)),by = list(nmin1.gram, word)]
-    QuadGram <- QuadGram[, j = list(hashword = spooky.32(nmin1.gram), freq), list(nmin1.gram, word)]
-    QuadGram <- QuadGram[,1:4]
+    QuadGram <- QuadGram[, j = list(freq), by = list(nmin1.gram, word)]
     saveRDS(QuadGram, "NGrams/Final_Quadgram.rds")
-    QuadGram <- QuadGram[order(freq)]
-    Quad <- hashmap(QuadGram$hashword, QuadGram$word)
-    save_hashmap(Quad, "NGrams/Quad")
-    
-    
+    return(QuadGram)
+
   }
   
 }
   
 
-consolidate_ngram(1)
-consolidate_ngram(2)
-consolidate_ngram(3)
-consolidate_ngram(4)
+UniGram <- consolidate_ngram(1)
+BiGram <- consolidate_ngram(2)
+TriGram <- consolidate_ngram(3)
+QuadGram <- consolidate_ngram(4)
 
-  
-# UniGram <- readRDS("NGrams/Final_UniGram.rds")
-# BiGram <- readRDS("NGrams/Final_BiGram.rds")
-# TriGram <- readRDS("NGrams/Final_TriGram.rds")
-# QuadGram <- readRDS("NGrams/Final_QuadGram.rds")
-
-
+# BiGram <- BiGram[j = list(freq_grp = as.factor(freq)), by = list(nmin1.gram, word, freq)]
+# BiFreqCount <- BiGram[j = list(count = count(freq_char)), by = freq_grp]
