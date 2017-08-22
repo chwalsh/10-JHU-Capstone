@@ -115,7 +115,25 @@ out[1:50,]
 
 
 set.seed(522)
-sample <- QuadGram_test[sample(.N,500)]
-predict <- sapply(sample$nmin1.gram, katzgt_quad)
+sample <- QuadGram_test[sample(.N,5000)]
 
+predict <- sapply(sample$nmin1.gram, katzgt_quad)
+sample$predict <- predict
+sample$match <- sample$word == sample$predict
+sum(sample$match)/length(sample$match)
+
+predict2 <- sapply(sample$nmin1.gram, katz_quad, k=0.5)
+sample$predict2 <- predict2
+sample$match2 <- sample$word == sample$predict2
+sum(sample$match2)/length(sample$match2)
+
+predict3 <- sapply(sample$nmin1.gram, katz_quad, k=0.25)
+sample$predict3 <- predict3
+sample$match3 <- sample$word == sample$predict3
+sum(sample$match3)/length(sample$match3)
+
+predict4 <- sapply(sample$nmin1.gram, katz_quad, k=0.7)
+sample$predict4 <- predict4
+sample$match4 <- sample$word == sample$predict4
+sum(sample$match4)/length(sample$match4)
 
