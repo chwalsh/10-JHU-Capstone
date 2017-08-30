@@ -11,10 +11,16 @@
 
 source("On Load.R")
 
-UniGram <- readRDS("NGrams/Final_UniGram.rds")
-BiGram <- readRDS("NGrams/Final_BiGram.rds")
-TriGram <- readRDS("NGrams/Final_TriGram.rds")
-QuadGram <- readRDS("NGrams/Final_QuadGram.rds")
+# UniGram <- readRDS("NGrams/Final_UniGram 1-16.rds")
+# BiGram <- readRDS("NGrams/Final_BiGram 1-16.rds")
+# TriGram <- readRDS("NGrams/Final_TriGram 1-16.rds")
+# QuadGram <- readRDS("NGrams/Final_QuadGram 1-16.rds")
+
+UniGram <- readRDS("NGrams/Final_UniGram 1-16.rds")
+BiGram <- readRDS("NGrams/BiGram_Cutoff.rds")
+TriGram <- readRDS("NGrams/TriGram_Cutoff.rds")
+QuadGram <- readRDS("NGrams/QuadGram_Cutoff.rds")
+
 
 # katzgt_bi <- function(x){
 # 
@@ -104,36 +110,35 @@ katzgt_quad <- function(x){
                              BiGram_rel[j = list(word, prob)],UniGram_rel[j = list(word, prob)]))
   Quad_out <- Quad_out[order(-prob)]
   
-  return(Quad_out[1:100,])
+  # return(Quad_out[1:100,])
+  return(Quad_out[1,1])
 
 }
 
-out <- katzgt_quad("groceries in each")
+out <- katzgt_quad("My favorite food is")
+ 
+display <- out$word[1:3]
+wordcloud(out$word, out$prob, max.words = 100, random.order = FALSE, colors=brewer.pal(8, "Dark2"))
 
-out$word[1:3]
-out[1:50,]
+# out[1:50,]
 
 
-set.seed(522)
+###############################
+###############################
+
+QuadGram_test <- readRDS("NGrams/QuadGrams_test.rds")
+
+
+UniGram <- readRDS("NGrams/Final_UniGram 1-16.rds")
+BiGram <- readRDS("NGrams/BiGram_Cutoff.rds")
+TriGram <- readRDS("NGrams/TriGram_Cutoff.rds")
+QuadGram <- readRDS("NGrams/QuadGram_Cutoff.rds")
+
+# set.seed(522)
+set.seed(12)
 sample <- QuadGram_test[sample(.N,5000)]
 
 predict <- sapply(sample$nmin1.gram, katzgt_quad)
 sample$predict <- predict
 sample$match <- sample$word == sample$predict
 sum(sample$match)/length(sample$match)
-
-predict2 <- sapply(sample$nmin1.gram, katz_quad, k=0.5)
-sample$predict2 <- predict2
-sample$match2 <- sample$word == sample$predict2
-sum(sample$match2)/length(sample$match2)
-
-predict3 <- sapply(sample$nmin1.gram, katz_quad, k=0.25)
-sample$predict3 <- predict3
-sample$match3 <- sample$word == sample$predict3
-sum(sample$match3)/length(sample$match3)
-
-predict4 <- sapply(sample$nmin1.gram, katz_quad, k=0.7)
-sample$predict4 <- predict4
-sample$match4 <- sample$word == sample$predict4
-sum(sample$match4)/length(sample$match4)
-
