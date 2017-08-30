@@ -14,6 +14,8 @@ require(dplyr)
 require(ggplot2)
 require(slam)
 require(RWeka)
+
+setwd('..')
 ```
 
 ## Synopsis

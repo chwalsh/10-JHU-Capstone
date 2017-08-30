@@ -51,8 +51,12 @@ Temporary Items
 # Ignore raw data and NGram folder for github
 raw_data/**
 NGrams/**
-Explore_Swiftkey_files/**
-Explore_Swiftkey_cache/**
+**/Explore_Swiftkey_files/**
+**/Explore_Swiftkey_cache/**
+**/.cache
+**/assets
+**/libraries
+**/rsconnect/**
 Load.R
 Load and Explore.R
 Consolidate_Help.R

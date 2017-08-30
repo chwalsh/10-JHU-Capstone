@@ -79,7 +79,7 @@ QuadGram <- readRDS("NGrams/QuadGram_Cutoff.rds")
 # }
 
 katzgt_quad <- function(x){
-
+  
   x <- VCorpus(VectorSource(x))
   x <- tm_map(x, removePunctuation)
   x <- tm_map(x,content_transformer(tolower))
@@ -112,11 +112,11 @@ katzgt_quad <- function(x){
   
   # return(Quad_out[1:100,])
   return(Quad_out[1,1])
-
+  
 }
 
 out <- katzgt_quad("My favorite food is")
- 
+
 display <- out$word[1:3]
 wordcloud(out$word, out$prob, max.words = 100, random.order = FALSE, colors=brewer.pal(8, "Dark2"))
 
