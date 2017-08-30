@@ -62,10 +62,10 @@ library(knitr)
 ```{r load, cache = TRUE, include=FALSE}
 
 setwd('..')
-UniGram <- readRDS("NGrams/Final_UniGram 1-16.rds")
-BiGram <- readRDS("NGrams/BiGram_Cutoff.rds")
-TriGram <- readRDS("NGrams/TriGram_Cutoff.rds")
-QuadGram <- readRDS("NGrams/QuadGram_Cutoff.rds")
+UniGram <- readRDS("Shiny_App/UniGram_Cutoff.rds")
+BiGram <- readRDS("Shiny_App/BiGram_Cutoff.rds")
+TriGram <- readRDS("Shiny_App/TriGram_Cutoff.rds")
+QuadGram <- readRDS("Shiny_App/QuadGram_Cutoff.rds")
 QuadGram_test <- readRDS("NGrams/QuadGrams_test.rds")
 
 katzgt_quad <- function(x){

@@ -79,7 +79,7 @@ code {
 <li><p>The Corpus was tokenized into N-Grams using <code>RWeka</code>; for the purpose of this model, UniGrams, BiGrams, TriGrams, and 4-Grams were developed</p></li>
 <li><p>The <strong>Good-Turing discount</strong> was calculated based on N-Gram frequencies to smooth the eventual model<a href="http://www.cs.cornell.edu/courses/cs4740/2014sp/lectures/smoothing+backoff.pdf"><sup>1</sup></a></p></li>
 <li><p>A simple <strong>Katz Backoff model</strong> was developed based on these adjusted N-Gram frequencies to estimate the probability of each potential next word<a href="http://www.cs.cornell.edu/courses/cs4740/2014sp/lectures/smoothing+backoff.pdf"><sup>2</sup></a></p></li>
-<li><p>To optimize for performance on the Shiny server, the underlying N-Gram frequency tables were pruned; both <strong>cutoff</strong> and <strong>weighted difference</strong> methods were tested, with better model performance (30% accuracy) at the desired frequency <code>data.table</code> size observed via the <strong>cutoff</strong> method<a href="https://pdfs.semanticscholar.org/6c8c/dff44ef74915a0276a7e1aba939eae7eefa7.pdf"><sup>3</sup></a></p></li>
+<li><p>To optimize for performance on the Shiny server, the underlying N-Gram frequency tables were pruned; both <strong>cutoff</strong> and <strong>weighted difference</strong> methods were tested, with better model performance (12.53% accuracy) at the desired frequency <code>data.table</code> size observed via the <strong>cutoff</strong> method<a href="https://pdfs.semanticscholar.org/6c8c/dff44ef74915a0276a7e1aba939eae7eefa7.pdf"><sup>3</sup></a></p></li>
 </ul>
 
 </section>

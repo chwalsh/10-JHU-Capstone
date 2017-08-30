@@ -89,7 +89,7 @@ Several steps were taken in order to develop the underlying NLP model:
 
 * A simple **Katz Backoff model** was developed based on these adjusted N-Gram frequencies to estimate the probability of each potential next word[^2](http://www.cs.cornell.edu/courses/cs4740/2014sp/lectures/smoothing+backoff.pdf)
 
-* To optimize for performance on the Shiny server, the underlying N-Gram frequency tables were pruned; both **cutoff** and **weighted difference** methods were tested, with better model performance (30% accuracy) at the desired frequency `data.table` size observed via the **cutoff** method[^3](https://pdfs.semanticscholar.org/6c8c/dff44ef74915a0276a7e1aba939eae7eefa7.pdf)
+* To optimize for performance on the Shiny server, the underlying N-Gram frequency tables were pruned; both **cutoff** and **weighted difference** methods were tested, with better model performance (12.53% accuracy) at the desired frequency `data.table` size observed via the **cutoff** method[^3](https://pdfs.semanticscholar.org/6c8c/dff44ef74915a0276a7e1aba939eae7eefa7.pdf)
 
 
 ---
