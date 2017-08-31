@@ -52,9 +52,20 @@ code {
   
 </style>
 
-<h2>The Use Case</h2>
+<h2>Data Science Capstone</h2>
 
-<p>In today&#39;s mobile world, Natural Langague Processing (NLP) is all around us. This Data Science Capstone, administered in concert with <strong>SwiftKey</strong>, is focused on the development of an NLP model capable of predicting the next word in a text string based on the provided SwiftKey <a href="https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip">English language corpus</a>. 
+<hr>
+
+<h3>Next Word Prediction with the SwiftKey Corpus</h3>
+
+<h4>Chris Walsh</h4>
+
+<h4>August 31, 2017</h4>
+
+</section>
+<section class='' data-state='' id='slide-2'>
+  <h2>The Use Case</h2>
+  <p>In today&#39;s mobile world, Natural Langague Processing (NLP) is all around us. This Data Science Capstone, administered in concert with <strong>SwiftKey</strong>, is focused on the development of an NLP model capable of predicting the next word in a text string based on the provided SwiftKey <a href="https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip">English language corpus</a>. 
 <br>
 <br></p>
 
@@ -65,12 +76,12 @@ code {
 <ol>
 <li><p>The Milestone Report: <a href="http://rpubs.com/cwalsh/300582">link here</a></p></li>
 <li><p>The Next Word Prediction Shiny application: <a href="https://cwalsh.shinyapps.io/data_science_capstone_next_word_prediction/">link here</a></p></li>
-<li><p>The Presentation: <a href="https://cwalsh.shinyapps.io/data_science_capstone_next_word_prediction/">link here</a></p></li>
+<li><p>The Presentation: <a href="https://chwalsh.github.io/10-JHU-Capstone/">link here</a></p></li>
 <li><p>The Code: <a href="https://github.com/chwalsh/10-JHU-Capstone">link here</a></p></li>
 </ol>
 
 </section>
-<section class='' data-state='' id='slide-2'>
+<section class='' data-state='' id='slide-3'>
   <h2>The Algorithm</h2>
   <p>Several steps were taken in order to develop the underlying NLP model:</p>
 
@@ -78,12 +89,12 @@ code {
 <li><p>The Corpus was ingested and cleansed using <code>tm</code> and <code>stringi</code>; this process included: converting characters to a standard encoding;  transforming to lowercase; and stripping punctuation, numbers, and excess whitespace </p></li>
 <li><p>The Corpus was tokenized into N-Grams using <code>RWeka</code>; for the purpose of this model, UniGrams, BiGrams, TriGrams, and 4-Grams were developed</p></li>
 <li><p>The <strong>Good-Turing discount</strong> was calculated based on N-Gram frequencies to smooth the eventual model<a href="http://www.cs.cornell.edu/courses/cs4740/2014sp/lectures/smoothing+backoff.pdf"><sup>1</sup></a></p></li>
-<li><p>A simple <strong>Katz Backoff model</strong> was developed based on these adjusted N-Gram frequencies to estimate the probability of each potential next word<a href="http://www.cs.cornell.edu/courses/cs4740/2014sp/lectures/smoothing+backoff.pdf"><sup>2</sup></a></p></li>
+<li><p>A <strong>Katz Backoff model</strong> was developed based on these adjusted N-Gram frequencies to estimate the conditional probability of each potential next word; if sufficient information cannot be found using higher-level N-Grams, the backoff model can estimate the probability based on progessively smaller N-Grams<a href="http://www.cs.cornell.edu/courses/cs4740/2014sp/lectures/smoothing+backoff.pdf"><sup>2</sup></a></p></li>
 <li><p>To optimize for performance on the Shiny server, the underlying N-Gram frequency tables were pruned; both <strong>cutoff</strong> and <strong>weighted difference</strong> methods were tested, with better model performance (12.53% accuracy) at the desired frequency <code>data.table</code> size observed via the <strong>cutoff</strong> method<a href="https://pdfs.semanticscholar.org/6c8c/dff44ef74915a0276a7e1aba939eae7eefa7.pdf"><sup>3</sup></a></p></li>
 </ul>
 
 </section>
-<section class='' data-state='' id='slide-3'>
+<section class='' data-state='' id='slide-4'>
   <h2>The App</h2>
   <p>This algorithm was then deployed via a <a href="https://cwalsh.shinyapps.io/data_science_capstone_next_word_prediction/">Shiny app</a>. When text is input into the box, the Model Output tab provides three unique ways to interact with the model output:</p>
 
@@ -96,7 +107,7 @@ code {
 <p><img src="figures/NLP.png" title="plot of chunk image" alt="plot of chunk image" height="400px" style="display: block; margin: auto;" /></p>
 
 </section>
-<section class='' data-state='' id='slide-4'>
+<section class='' data-state='' id='slide-5'>
   <h2>Next Steps</h2>
   <ul>
 <li><p>As the intial exploratory analysis shows, <em>context matters</em>; N-Gram frequencies differ across blog, twitter, and news corpora. While all three sources are consolidated in the underlying model, greater accuracy could potentially be gained by dynamically selecting corpora sources based on application.</p></li>

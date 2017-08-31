@@ -1,14 +1,15 @@
 ---
 title: 'Data Science Capstone'
-subtitle    : 'Next Word Prediction with the SwiftKey Corpus'
-author      : "Chris Walsh"
-job         : "August 31, 2017"
+subtitle: 'Next Word Prediction with the SwiftKey Corpus'
+author: "Chris Walsh"
+date: "August 31, 2017"
+output: revealjs::revealjs_presentation
 framework   : revealjs      # {io2012, html5slides, shower, dzslides, ...}
 revealjs    :
   theme: night
   transition: convex
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
-hitheme     : tomorrow      # 
+hitheme     : tomorrow      #
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
@@ -106,6 +107,13 @@ katzgt_quad <- function(x){
 
 ```
 
+## Data Science Capstone
+---------------------
+### Next Word Prediction with the SwiftKey Corpus
+#### Chris Walsh
+#### August 31, 2017
+
+---
 
 
 ## The Use Case
@@ -122,7 +130,7 @@ Several products were developed to support this Capstone. They can be found belo
 
 2. The Next Word Prediction Shiny application: [link here](https://cwalsh.shinyapps.io/data_science_capstone_next_word_prediction/)
 
-3. The Presentation: [link here](https://cwalsh.shinyapps.io/data_science_capstone_next_word_prediction/)
+3. The Presentation: [link here](https://chwalsh.github.io/10-JHU-Capstone/)
 
 4. The Code: [link here](https://github.com/chwalsh/10-JHU-Capstone)
 
@@ -150,7 +158,7 @@ Several steps were taken in order to develop the underlying NLP model:
 
 * The **Good-Turing discount** was calculated based on N-Gram frequencies to smooth the eventual model[^1](http://www.cs.cornell.edu/courses/cs4740/2014sp/lectures/smoothing+backoff.pdf)
 
-* A simple **Katz Backoff model** was developed based on these adjusted N-Gram frequencies to estimate the probability of each potential next word[^2](http://www.cs.cornell.edu/courses/cs4740/2014sp/lectures/smoothing+backoff.pdf)
+* A **Katz Backoff model** was developed based on these adjusted N-Gram frequencies to estimate the conditional probability of each potential next word; if sufficient information cannot be found using higher-level N-Grams, the backoff model can estimate the probability based on progessively smaller N-Grams[^2](http://www.cs.cornell.edu/courses/cs4740/2014sp/lectures/smoothing+backoff.pdf)
 
 * To optimize for performance on the Shiny server, the underlying N-Gram frequency tables were pruned; both **cutoff** and **weighted difference** methods were tested, with better model performance (`r accuracy*100`% accuracy) at the desired frequency `data.table` size observed via the **cutoff** method[^3](https://pdfs.semanticscholar.org/6c8c/dff44ef74915a0276a7e1aba939eae7eefa7.pdf)
 

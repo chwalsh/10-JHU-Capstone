@@ -54,6 +54,8 @@ NGrams/**
 **/Explore_Swiftkey_files/**
 **/Explore_Swiftkey_cache/**
 **/.cache
+**/index_cache
+**/
 Load.R
 Load and Explore.R
 Consolidate_Help.R
