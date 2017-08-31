@@ -134,9 +134,8 @@ BiGram <- readRDS("NGrams/BiGram_Cutoff.rds")
 TriGram <- readRDS("NGrams/TriGram_Cutoff.rds")
 QuadGram <- readRDS("NGrams/QuadGram_Cutoff.rds")
 
-# set.seed(522)
-set.seed(12)
-sample <- QuadGram_test[sample(.N,5000)]
+set.seed(522)
+sample <- QuadGram_test[sample(.N,1000)]
 
 predict <- sapply(sample$nmin1.gram, katzgt_quad)
 sample$predict <- predict
